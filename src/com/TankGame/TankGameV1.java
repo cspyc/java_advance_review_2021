@@ -1,7 +1,6 @@
 package com.TankGame;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author Pi
@@ -11,7 +10,6 @@ public class TankGameV1 extends JFrame {
 
     public static void main(String[] args) {
         TankGameV1 tankGameV1 = new TankGameV1();
-
     }
 
     //定义游戏区域画板
@@ -19,6 +17,8 @@ public class TankGameV1 extends JFrame {
 
     public TankGameV1() {
         tp = new TankGamePanel();
+        Thread thread = new Thread(tp);//把绘图板放到一个线程内，并启动,不停地重绘
+        thread.start();
 
         //画框添加画板
         this.add(tp);
