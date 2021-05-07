@@ -1,5 +1,6 @@
 package com.TankGame;
 
+
 import static com.TankGame.TankMoveDirectCode.*;
 
 /**
@@ -40,24 +41,40 @@ public class Tank {
         return direct;
     }
 
+    public void moveLeft() {
+        this.x -= speed;
+    }
+
     public void turnLeftAndMove() {
         this.direct = LEFT;
-        this.x -= speed;
+        moveLeft();
+    }
+
+    public void moveRight() {
+        this.x += speed;
     }
 
     public void turnRightAndMove() {
         this.direct = RIGHT;
-        this.x += speed;
+        moveRight();
+    }
+
+    public void moveUp() {
+        this.y -= speed;
     }
 
     public void turnToUpwardAndMove() {
         this.direct = UP;
-        this.y -= speed;
+        moveUp();
+    }
+
+    public void moveDown() {
+        this.y += speed;
     }
 
     public void turnToDownwardAndMove() {
         this.direct = DOWN;
-        this.y += speed;
+        moveDown();
     }
 
     public void dispel() {
@@ -68,4 +85,7 @@ public class Tank {
         return this.isLive;
     }
 
+    public void setDirect(TankMoveDirectCode direct) {
+        this.direct = direct;
+    }
 }

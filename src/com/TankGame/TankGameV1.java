@@ -23,7 +23,7 @@ public class TankGameV1 extends JFrame {
         //画框添加画板
         this.add(tp);
         this.setVisible(true);
-        this.setSize(1000, 750);
+        this.setSize(1200, 850);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //设置键盘事件监听
