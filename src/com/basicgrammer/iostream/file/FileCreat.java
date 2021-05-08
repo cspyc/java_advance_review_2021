@@ -1,4 +1,4 @@
-package com.basicgrammer.iostream;
+package com.basicgrammer.iostream.file;
 
 import org.junit.Test;
 
@@ -44,7 +44,6 @@ public class FileCreat {
         try {
             file.createNewFile();
             System.out.println("创建文件成功");
-            InputStream
         } catch (IOException e) {
             e.printStackTrace();
         }
