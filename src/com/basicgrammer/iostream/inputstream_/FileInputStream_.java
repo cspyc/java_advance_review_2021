@@ -1,11 +1,9 @@
 package com.basicgrammer.iostream.inputstream_;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
