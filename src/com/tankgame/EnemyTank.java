@@ -1,9 +1,9 @@
-package com.TankGame;
+package com.tankgame;
 
 import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.TankGame.TankMoveDirectCode.*;
+import static com.tankgame.TankMoveDirectCode.*;
 
 /**
  * @author Pi
@@ -14,8 +14,15 @@ public class EnemyTank extends Tank implements Runnable {
     //在敌人坦克类，使用Vector，保存多个shot
     Vector<Shot> shots = new Vector<>();
 
+    //当前游戏界面中的敌军坦克集合
+    Vector<Tank> enemyTanks = new Vector<>();
+
     public EnemyTank(int x, int y, TankMoveDirectCode direct, int speed) {
         super(x, y, direct, speed);
+    }
+
+    public void setEnemyTanks(Vector<Tank> enemyTanks) {
+        this.enemyTanks = enemyTanks;
     }
 
     //敌人坦克设置成方向随机、移动；每隔一段时间自动换方向(遇到障碍物也需要自动换方向)
@@ -82,7 +89,7 @@ public class EnemyTank extends Tank implements Runnable {
                 //让坦克保持一个方向，走30步
                 for (int i = 0; i < 30; i++) {
                     //Y坐标大于等于0时，可以继续往上走
-                    if (getY() > 0) {
+                    if (getY() > 0 && !isEnenmyTanksCollisioned()) {
                         moveUp();
                     }
                     //休眠50ms
@@ -95,7 +102,7 @@ public class EnemyTank extends Tank implements Runnable {
                 break;
             case RIGHT:
                 for (int i = 0; i < 30; i++) {
-                    if (getY() + 60 < 1000) {
+                    if (getY() + 60 < 1000 && !isEnenmyTanksCollisioned()) {
                         moveRight();
                     }
                     //休眠50ms
@@ -108,7 +115,7 @@ public class EnemyTank extends Tank implements Runnable {
                 break;
             case DOWN:
                 for (int i = 0; i < 30; i++) {
-                    if (getY() + 60 < 750) {
+                    if (getY() + 60 < 750 && !isEnenmyTanksCollisioned()) {
                         moveDown();
                     }
                     //休眠50ms
@@ -121,7 +128,7 @@ public class EnemyTank extends Tank implements Runnable {
                 break;
             case LEFT:
                 for (int i = 0; i < 30; i++) {
-                    if (getX() > 0) {
+                    if (getX() > 0 && !isEnenmyTanksCollisioned()) {
                         moveLeft();
                     }
                     //休眠50ms
@@ -133,5 +140,14 @@ public class EnemyTank extends Tank implements Runnable {
                 }
                 break;
         }
+    }
+
+    public boolean isEnenmyTanksCollisioned() {
+        for (int i = 0; i < enemyTanks.size(); i++) {
+            if (this != enemyTanks.get(i)) {
+                return this.isCollisionTank(enemyTanks.get(i));
+            }
+        }
+        return false;
     }
 }

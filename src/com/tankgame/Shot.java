@@ -1,4 +1,4 @@
-package com.TankGame;
+package com.tankgame;
 
 /**
  * @author Pi

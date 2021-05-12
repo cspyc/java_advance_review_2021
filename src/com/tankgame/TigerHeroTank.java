@@ -1,8 +1,8 @@
-package com.TankGame;
+package com.tankgame;
 
 import java.util.Vector;
 
-import static com.TankGame.TankMoveDirectCode.*;
+import static com.tankgame.TankMoveDirectCode.*;
 
 /**
  * @author Pi

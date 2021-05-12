@@ -1,9 +1,5 @@
 package com.basicgrammer.threds_;
 
-import com.TankGame.TigerHeroTank;
-
-import javax.management.relation.RelationNotFoundException;
-
 /**
  * @author Pi
  * @date 2021-04-24 14:35

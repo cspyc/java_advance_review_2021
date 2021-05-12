@@ -1,4 +1,4 @@
-package com.TankGame;
+package com.tankgame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,8 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Vector;
 
-import static com.TankGame.TankMoveDirectCode.DOWN;
-import static com.TankGame.TankMoveDirectCode.UP;
+import static com.tankgame.TankMoveDirectCode.DOWN;
+import static com.tankgame.TankMoveDirectCode.UP;
 
 /**
  * @author Pi
@@ -44,7 +44,9 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
             //启动shot对象
             new Thread(shot).start();
             enemyTanks.add(enemyTank);
+            enemyTank.setEnemyTanks(enemyTanks);
         }
+
 
         //初始化炸弹图片对象
         bomb1 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_1.gif"));
@@ -298,6 +300,7 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
         }
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -373,13 +376,13 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
         }
     }
 
+    //炮击以及碰撞
     private void hitMyTigerTank() {
         if (enemyTanks != null && enemyTanks.size() != 0) {
             for (int i = 0; i < enemyTanks.size(); i++) {
                 EnemyTank enemyTank = (EnemyTank) enemyTanks.get(i);
                 Vector<Shot> enemyTankShots = enemyTank.shots;
                 if (enemyTankShots != null && !enemyTankShots.isEmpty()) {
-
                     for (Shot shot : enemyTankShots) {
                         if (shot != null && shot.isLive()) {//当坦克子弹还存活
                             //判断我方坦克是否被击中
