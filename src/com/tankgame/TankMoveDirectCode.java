@@ -1,10 +1,15 @@
 package com.tankgame;
 
+import java.util.logging.Level;
+
 /**
  * @author Pi
  * @date 2021-04-23 20:16
  */
 public enum TankMoveDirectCode {
+    /**
+     * 方向
+     */
     UP(0, "向上"),
     RIGHT(1, "向右"),
     DOWN(2, "向下"),
@@ -25,5 +30,26 @@ public enum TankMoveDirectCode {
 
     public String getValue() {
         return value;
+    }
+
+    public static TankMoveDirectCode getDirectCodeFromIntNum(int directNum) {
+        TankMoveDirectCode result = null;
+        switch (directNum) {
+            case 0:
+                result = UP;
+                break;
+            case 1:
+                result = RIGHT;
+                break;
+            case 2:
+                result = DOWN;
+                break;
+            case 3:
+                result = LEFT;
+                break;
+            default:
+                break;
+        }
+        return result;
     }
 }

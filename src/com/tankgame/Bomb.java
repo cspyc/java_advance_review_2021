@@ -4,6 +4,7 @@ package com.tankgame;
  * @author Pi
  * @date 2021-05-05 22:26
  */
+@SuppressWarnings({"all"})
 public class Bomb {
     private int x, y;//炸弹的坐标
     private int life = 9;//炸弹的生命周期

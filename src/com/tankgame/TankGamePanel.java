@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.Vector;
 
 import static com.tankgame.TankMoveDirectCode.DOWN;
@@ -23,35 +24,91 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
     private Vector<Bomb> bombs = new Vector<>();
 
     //定义三张炸弹图片，用于显示爆炸效果
-    Image bomb1 = null;
-    Image bomb2 = null;
-    Image bomb3 = null;
+    Image bombImage1 = null;
+    Image bombImage2 = null;
+    Image bombImage3 = null;
 
+    public Vector<Tank> getEnemyTanks() {
+        return enemyTanks;
+    }
 
-    public TankGamePanel() {
+    public TankGamePanel(String gameType) {
         //初始化我方坦克
         myTank = new TigerHeroTank(300, 200, UP, 3);
 
-        //初始化敌方坦克
-        int enemyTankNum = 3;
-        for (int i = 0; i < enemyTankNum; i++) {
-            EnemyTank enemyTank = new EnemyTank(100 * (i + 1), 10, DOWN, 2);
-            //启动敌人坦克线程
-            new Thread(enemyTank).start();
-            //给坦克装弹
-            Shot shot = new Shot(enemyTank.getX() + 20, enemyTank.getY() + 60, enemyTank.getDirect(), 2);
-            enemyTank.shots.add(shot);
-            //启动shot对象
-            new Thread(shot).start();
-            enemyTanks.add(enemyTank);
-            enemyTank.setEnemyTanks(enemyTanks);
+        //读取存档
+        if ("2".equals(gameType)) {
+            //需要先判断文件是否存在
+            File file = new File(Recorder.getRecordFile());
+            if (file.exists()) {
+                Recorder.readRecord();
+            } else {
+                System.out.println("存档文件不存在");
+                //begin new Game
+                gameType = "1";
+            }
+            if (Recorder.getEnemyTanks() != null && Recorder.getEnemyTanks().size() > 0) {
+                enemyTanks = Recorder.getEnemyTanks();
+                for (int i = 0; i < enemyTanks.size(); i++) {
+                    EnemyTank enemyTank = (EnemyTank) enemyTanks.get(i);
+
+                    //启动敌人坦克线程
+                    new Thread(enemyTank).start();
+                    //给坦克装弹
+                    Shot shot = new Shot(enemyTank.getX() + 20, enemyTank.getY() + 60, enemyTank.getDirect(), 2);
+                    enemyTank.shots.add(shot);
+                    //启动shot对象
+                    new Thread(shot).start();
+                    enemyTank.setEnemyTanks(enemyTanks);
+                }
+            } else {
+                System.out.println("存档记录为空，开启新游戏");
+                gameType = "1";
+            }
+        }
+        if ("1".equals(gameType)) {
+            //初始化敌方坦克
+            int enemyTankNum = 3;
+            for (int i = 0; i < enemyTankNum; i++) {
+                EnemyTank enemyTank = new EnemyTank(100 * (i + 1), 10, DOWN, 2);
+                //启动敌人坦克线程
+                new Thread(enemyTank).start();
+                //给坦克装弹
+                Shot shot = new Shot(enemyTank.getX() + 20, enemyTank.getY() + 60, enemyTank.getDirect(), 2);
+                enemyTank.shots.add(shot);
+                //启动shot对象
+                new Thread(shot).start();
+                enemyTanks.add(enemyTank);
+                enemyTank.setEnemyTanks(enemyTanks);
+            }
         }
 
 
         //初始化炸弹图片对象
-        bomb1 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_1.gif"));
-        bomb2 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_2.gif"));
-        bomb3 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_3.gif"));
+        bombImage1 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_1.gif"));
+        bombImage2 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_2.gif"));
+        bombImage3 = Toolkit.getDefaultToolkit().getImage(Panel.class.getResource("/bomb_3.gif"));
+
+        //播放指定音乐
+        new AePlayWave("src/tankGameMusic.wav").start();
+    }
+
+    //编写方法，显示我方击毁敌方坦克信息
+    public void showInfo(Graphics g) {
+        //画出玩家总成绩
+        g.setColor(Color.BLACK);
+        Font font = new Font("宋体", Font.BOLD, 25);
+        g.setFont(font);
+
+        g.drawString("您累积击毁第三方坦克", 1020, 30);
+
+        //画出一个敌方坦克
+        drawTank(g, 1020, 60, UP, 1);
+
+        //画坦克时，画笔颜色被重置了，需要重新设置
+        g.setColor(Color.BLACK);
+        g.drawString(String.valueOf(Recorder.getAllEnemyTankNum()), 1080, 100);
+
     }
 
     @Override
@@ -60,6 +117,7 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
 
         //游戏区域背景
         g.fillRect(0, 0, 1000, 750);//填充矩形，默认黑色
+        showInfo(g);
 
         //画出我方坦克
         if (myTank != null && myTank.isLive()) {
@@ -82,12 +140,13 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
         //如果bombs集合中有对象，就画出炸弹
         for (int i = 0; i < bombs.size(); i++) {
             Bomb bomb = bombs.get(i);
+            //炸弹生命值不同，画出不同的炸弹效果
             if (bomb.getLife() > 6) {
-                g.drawImage(bomb1, bomb.getX(), bomb.getY(), 60, 60, this);
+                g.drawImage(bombImage1, bomb.getX(), bomb.getY(), 60, 60, this);
             } else if (bomb.getLife() > 3) {
-                g.drawImage(bomb2, bomb.getX(), bomb.getY(), 60, 60, this);
+                g.drawImage(bombImage2, bomb.getX(), bomb.getY(), 60, 60, this);
             } else {
-                g.drawImage(bomb3, bomb.getX(), bomb.getY(), 60, 60, this);
+                g.drawImage(bombImage3, bomb.getX(), bomb.getY(), 60, 60, this);
             }
             //减少炸弹生命值
             bomb.lifeDown();
@@ -273,6 +332,8 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
                     //移除被击中的坦克
                     if (enemyTanks != null && enemyTanks.size() > 0) {
                         enemyTanks.remove(tank);
+                        //当击毁一个敌方坦克时，需要加1
+                        Recorder.addAllEnemyTankNum();
                     } else {
                         tank = null;
                     }
@@ -290,6 +351,8 @@ public class TankGamePanel extends JPanel implements KeyListener, Runnable {
                     //移除被击中的坦克
                     if (enemyTanks != null && enemyTanks.size() > 0) {
                         enemyTanks.remove(tank);
+                        //当击毁一个敌方坦克时，需要加1
+                        Recorder.addAllEnemyTankNum();
                     } else {
                         tank = null;
                     }
