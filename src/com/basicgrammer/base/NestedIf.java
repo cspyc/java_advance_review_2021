@@ -17,7 +17,7 @@ public class NestedIf{
        
         if(score > 8.0){
             System.out.println("请输入选手性别：");
-            char gender = input.next().charA(0);
+            char gender = input.next().charAt(0);
             if(gender == '男'){
                 System.out.println("恭喜！进入男子组决赛！");
             }else if(gender == '女'){
