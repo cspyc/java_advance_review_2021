@@ -1,5 +1,7 @@
 package com.instantmessagetool.qqclient.service;
 
+import com.instantmessagetool.qqclient.common.User;
+
 /**
  * @author pi
  * @date 2021/05/18 15:09:19
@@ -7,4 +9,5 @@ package com.instantmessagetool.qqclient.service;
  **/
 public class UserClientService {
 
+//    private User user = new User();
 }
