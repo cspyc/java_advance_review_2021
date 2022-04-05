@@ -1,4 +1,4 @@
-package exercise;
+package com.dataStruct_algorithm.exercise;
 
 import com.dataStruct_algorithm.exercise.TxtReader;
 import org.junit.jupiter.api.Assertions;

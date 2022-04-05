@@ -1,6 +1,5 @@
 package com.basicgrammer.iostream.read_;
 
-import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,7 +14,6 @@ public class BufferedReader_ {
 
     }
 
-    @Test
     public void read_file_by_bufferedReader() {
         String file = "e:\\a.txt";
         BufferedReader bufferedReader = null;
@@ -39,7 +37,6 @@ public class BufferedReader_ {
         }
     }
 
-    @Test
     public void read_file_line_by_line_by_bufferedReader() {
         String file = "e:\\a.txt";
         BufferedReader bufferedReader = null;

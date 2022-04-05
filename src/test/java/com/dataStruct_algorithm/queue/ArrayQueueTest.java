@@ -1,4 +1,4 @@
-package queue;
+package com.dataStruct_algorithm.queue;
 
 
 import org.junit.jupiter.api.Assertions;

@@ -1,6 +1,5 @@
 package com.basicgrammer.iostream.read_;
 
-import org.junit.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,7 +18,6 @@ public class FileRead_ {
     /**
      * 一个个字符读取
      */
-    @Test
     public void read_char_by_char() {
         String file = "e:\\a.txt";
         FileReader fileReader = null;
@@ -47,7 +45,6 @@ public class FileRead_ {
     /**
      * 按字符数组读
      */
-    @Test
     public void read_by_char_array() {
         String file = "e:\\a.txt";
         FileReader fileReader = null;

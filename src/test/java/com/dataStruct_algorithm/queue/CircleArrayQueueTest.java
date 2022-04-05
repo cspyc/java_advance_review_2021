@@ -1,4 +1,4 @@
-package queue;
+package com.dataStruct_algorithm.queue;
 
 
 import com.dataStruct_algorithm.queue.CircleArrayQueue;

@@ -1,4 +1,4 @@
-package linkedlist;
+package com.dataStruct_algorithm.linkedlist;
 
 import com.dataStruct_algorithm.linkedlist.SingleLinkedList;
 import org.junit.jupiter.api.Test;

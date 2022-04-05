@@ -1,6 +1,7 @@
 package com.basicgrammer.iostream.transfermation;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package sort;
+package com.dataStruct_algorithm.sort;
 
 import com.dataStruct_algorithm.sort.QuickSorter;
 import org.junit.jupiter.api.Assertions;
