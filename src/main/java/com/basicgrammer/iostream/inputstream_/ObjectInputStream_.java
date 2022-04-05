@@ -1,9 +1,11 @@
 package com.basicgrammer.iostream.inputstream_;
 
 import com.basicgrammer.iostream.outputstream.Dog;
-import org.junit.Test;
 
 import java.io.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Pi
