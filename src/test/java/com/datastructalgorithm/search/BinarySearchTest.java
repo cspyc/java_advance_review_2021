@@ -1,4 +1,4 @@
-package com.dataStruct_algorithm.search;
+package com.datastructalgorithm.search;
 
 import org.junit.jupiter.api.Test;
 

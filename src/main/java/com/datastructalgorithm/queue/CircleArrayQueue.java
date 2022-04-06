@@ -1,4 +1,4 @@
-package com.dataStruct_algorithm.queue;
+package com.datastructalgorithm.queue;
 
 import java.util.NoSuchElementException;
 

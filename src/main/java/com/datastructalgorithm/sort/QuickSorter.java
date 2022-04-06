@@ -1,4 +1,4 @@
-package com.dataStruct_algorithm.sort;
+package com.datastructalgorithm.sort;
 
 /**
  * @author pi

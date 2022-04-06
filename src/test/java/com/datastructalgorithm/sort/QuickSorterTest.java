@@ -1,6 +1,5 @@
-package com.dataStruct_algorithm.sort;
+package com.datastructalgorithm.sort;
 
-import com.dataStruct_algorithm.sort.QuickSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.dataStruct_algorithm.linkedlist;
+package com.datastructalgorithm.linkedlist;
 
 /**
  * @author pi

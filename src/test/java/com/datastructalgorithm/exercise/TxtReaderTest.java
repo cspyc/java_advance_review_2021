@@ -1,6 +1,5 @@
-package com.dataStruct_algorithm.exercise;
+package com.datastructalgorithm.exercise;
 
-import com.dataStruct_algorithm.exercise.TxtReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

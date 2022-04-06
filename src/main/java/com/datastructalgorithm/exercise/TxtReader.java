@@ -1,4 +1,4 @@
-package com.dataStruct_algorithm.exercise;
+package com.datastructalgorithm.exercise;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

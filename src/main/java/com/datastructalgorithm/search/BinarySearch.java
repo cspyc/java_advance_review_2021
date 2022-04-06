@@ -1,4 +1,4 @@
-package com.dataStruct_algorithm.search;
+package com.datastructalgorithm.search;
 
 /**
  * @author pi
@@ -10,11 +10,10 @@ public class BinarySearch {
 
         //数组关键位置
         int low = 0;
-        int mid = Math.floorDiv(originOrderedArray.length, 2);
         int high = originOrderedArray.length - 1;
 
         while (low <= high) {
-            mid = Math.floorDiv(low + high, 2);
+            int mid = Math.floorDiv(low + high, 2);
             int guessNum = originOrderedArray[mid];
             if (targetNum == guessNum) {
                 return mid;
