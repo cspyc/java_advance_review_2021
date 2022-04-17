@@ -19,4 +19,16 @@ public class QuickSorterTest {
         Assertions.assertArrayEquals(result, expectedArray);
     }
 
+    @Test
+    public void should_return_sorted_array_by_quick_sort_2022() throws Exception {
+        QuickSorter2022 quickSorter2022 = new QuickSorter2022();
+        Integer[] toBeOrderedArray = {11,132,22,10,5,54,0,-1};
+        Integer[] result = quickSorter2022.quickSort(toBeOrderedArray);
+
+        Integer[] expectedArray = {-1,0,5,10,11,22,54,132};
+        Assertions.assertArrayEquals(expectedArray,result);
+    }
+
+
+
 }
